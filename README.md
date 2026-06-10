@@ -26,6 +26,10 @@
 
 ---
 
+<img width="680" height="240" alt="standard" src="https://github.com/user-attachments/assets/12cc1216-af11-4c02-826c-d80c36a8d175" />
+
+---
+
 <a id="english"></a>
 
 # 🇺🇸 English
