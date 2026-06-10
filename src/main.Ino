@@ -1,0 +1,453 @@
+#include <Arduino.h>
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+#ifndef ESP32
+  #error "This firmware was made for ESP32 only."
+#endif
+
+// ===== CONFIGURATION =====
+constexpr uint8_t W = 128;
+constexpr uint8_t H = 64;       // Use 32 if your OLED is 128x32.
+constexpr uint8_t OLED = 0x3C;  // Try 0x3D if the display does not start.
+constexpr int8_t OLED_RST = -1;
+
+constexpr uint8_t SDA_PIN = 21;
+constexpr uint8_t SCL_PIN = 22;
+constexpr uint8_t BTN_LEFT = 32;
+constexpr uint8_t BTN_OK = 33;
+constexpr uint8_t BTN_RIGHT = 25;
+
+constexpr uint8_t STACK_MAX = 4;
+constexpr uint16_t DEBOUNCE_MS = 35;
+constexpr uint16_t CLOCK_MS = 1000;
+constexpr uint16_t ANIM_MS = 90;
+
+#define COUNT(x) (sizeof(x) / sizeof((x)[0]))
+
+Adafruit_SSD1306 oled(W, H, &Wire, OLED_RST);
+
+enum Screen : uint8_t { SCREEN_MENU, SCREEN_PAGE, SCREEN_TEST };
+enum Icon : uint8_t { ICON_HOME, ICON_WIFI, ICON_APPS, ICON_SYSTEM, ICON_BACK, ICON_INFO, ICON_SCAN, ICON_DISPLAY };
+
+struct Button {
+  uint8_t pin;
+  bool stable = HIGH;
+  bool last = HIGH;
+  bool click = false;
+  uint32_t changedAt = 0;
+};
+
+struct Menu;
+
+struct Item {
+  const char *name;
+  Icon icon;
+  void (*action)();
+  const Menu *submenu;
+};
+
+struct Menu {
+  const char *title;
+  const Item *items;
+  uint8_t count;
+};
+
+Button leftBtn;
+Button okBtn;
+Button rightBtn;
+
+Screen screen = SCREEN_MENU;
+const Menu *activeMenu;
+const Menu *menuStack[STACK_MAX];
+uint8_t stackSize = 0;
+uint8_t selected = 0;
+bool dirty = true;
+uint32_t clockTick = 0;
+uint32_t animTick = 0;
+
+const char *pageTitle = "";
+const char *pageLine1 = "";
+const char *pageLine2 = "";
+char textA[22];
+char textB[22];
+
+void back();
+void page(const char *title, const char *line1, const char *line2);
+void loading(const char *title, const char *message, uint16_t durationMs);
+void home();
+void wifiScan();
+void wifiChannels();
+void appOne();
+void appTwo();
+void status();
+void about();
+void displayTest();
+
+// ===== MENUS =====
+
+const Item wifiItems[] = {
+  { "Back", ICON_BACK, back, nullptr },
+  { "Scan", ICON_SCAN, wifiScan, nullptr },
+  { "Channels", ICON_WIFI, wifiChannels, nullptr }
+};
+
+const Item appItems[] = {
+  { "Back", ICON_BACK, back, nullptr },
+  { "Action 1", ICON_APPS, appOne, nullptr },
+  { "Action 2", ICON_APPS, appTwo, nullptr }
+};
+
+const Item systemItems[] = {
+  { "Back", ICON_BACK, back, nullptr },
+  { "Status", ICON_SYSTEM, status, nullptr },
+  { "About", ICON_INFO, about, nullptr },
+  { "Display", ICON_DISPLAY, displayTest, nullptr }
+};
+
+const Menu wifiMenu = { "WIFI", wifiItems, COUNT(wifiItems) };
+const Menu appMenu = { "APPS", appItems, COUNT(appItems) };
+const Menu systemMenu = { "SYSTEM", systemItems, COUNT(systemItems) };
+
+const Item mainItems[] = {
+  { "Home", ICON_HOME, home, nullptr },
+  { "WiFi", ICON_WIFI, nullptr, &wifiMenu },
+  { "Apps", ICON_APPS, nullptr, &appMenu },
+  { "System", ICON_SYSTEM, nullptr, &systemMenu }
+};
+
+const Menu mainMenu = { "EXODO", mainItems, COUNT(mainItems) };
+
+// ===== USER FUNCTIONS =====
+// Edit this area to add the real functions of your project.
+
+void page(const char *title, const char *line1, const char *line2) {
+  pageTitle = title;
+  pageLine1 = line1;
+  pageLine2 = line2;
+  screen = SCREEN_PAGE;
+  dirty = true;
+}
+
+void back() {
+  activeMenu = stackSize ? menuStack[--stackSize] : &mainMenu;
+  selected = 0;
+  screen = SCREEN_MENU;
+  dirty = true;
+}
+
+void home() {
+  page("HOME", "Ethical toolkit", "OK to return");
+}
+
+void wifiScan() {
+  loading("WIFI", "Scanning", 900);
+  page("WIFI", "Passive scan", "add your code");
+}
+
+void wifiChannels() {
+  loading("WIFI", "Reading", 700);
+  page("CHANNELS", "2.4 GHz map", "demo screen");
+}
+
+void appOne() {
+  loading("APP 1", "Running", 800);
+  page("APP 1", "Replace this", "with your code");
+}
+
+void appTwo() {
+  loading("APP 2", "Running", 800);
+  page("APP 2", "Sensor/rele", "placeholder");
+}
+
+void status() {
+  snprintf(textA, sizeof(textA), "Heap %lu KB", (unsigned long)(ESP.getFreeHeap() / 1024));
+  snprintf(textB, sizeof(textB), "Up %lu sec", (unsigned long)(millis() / 1000));
+  page("STATUS", textA, textB);
+}
+
+void about() {
+  page("ABOUT", "ESP32 + OLED", "Defensive lab");
+}
+
+void displayTest() {
+  screen = SCREEN_TEST;
+  dirty = true;
+}
+
+// ===== BUTTONS AND NAVIGATION =====
+
+void beginButton(Button &button, uint8_t pin) {
+  button.pin = pin;
+  pinMode(pin, INPUT_PULLUP);
+  button.stable = button.last = digitalRead(pin);
+  button.changedAt = millis();
+}
+
+void readButton(Button &button) {
+  const bool reading = digitalRead(button.pin);
+
+  if (reading != button.last) {
+    button.last = reading;
+    button.changedAt = millis();
+  }
+
+  if (millis() - button.changedAt > DEBOUNCE_MS && reading != button.stable) {
+    button.stable = reading;
+    button.click = (reading == LOW);
+  }
+}
+
+bool takeClick(Button &button) {
+  if (!button.click) return false;
+  button.click = false;
+  return true;
+}
+
+void openSelectedItem() {
+  const Item &item = activeMenu->items[selected];
+
+  if (item.submenu) {
+    if (stackSize < STACK_MAX) menuStack[stackSize++] = activeMenu;
+    activeMenu = item.submenu;
+    selected = 0;
+    dirty = true;
+  } else if (item.action) {
+    item.action();
+  }
+}
+
+void updateInput() {
+  readButton(leftBtn);
+  readButton(okBtn);
+  readButton(rightBtn);
+
+  if (screen != SCREEN_MENU) {
+    if (takeClick(okBtn)) {
+      screen = SCREEN_MENU;
+      dirty = true;
+    }
+    takeClick(leftBtn);
+    takeClick(rightBtn);
+    return;
+  }
+
+  if (takeClick(leftBtn)) {
+    selected = selected ? selected - 1 : activeMenu->count - 1;
+    dirty = true;
+  }
+
+  if (takeClick(rightBtn)) {
+    selected = (selected + 1) % activeMenu->count;
+    dirty = true;
+  }
+
+  if (takeClick(okBtn)) {
+    openSelectedItem();
+  }
+}
+
+// ===== INTERFACE =====
+
+bool compact() {
+  return H <= 32;
+}
+
+void centerText(const char *text, int16_t y, uint8_t size, uint16_t color, uint16_t bg = SSD1306_BLACK) {
+  int16_t x1, y1;
+  uint16_t tw, th;
+  oled.setTextSize(size);
+  oled.setTextColor(color, bg);
+  oled.getTextBounds(text, 0, y, &x1, &y1, &tw, &th);
+  oled.setCursor(tw >= W ? 0 : (W - tw) / 2, y);
+  oled.print(text);
+  oled.setTextSize(1);
+  oled.setTextColor(SSD1306_WHITE);
+}
+
+void drawHeader(const char *title) {
+  const uint32_t seconds = millis() / 1000;
+  char timeText[6];
+  snprintf(timeText, sizeof(timeText), "%02lu:%02lu", (unsigned long)((seconds / 60) % 100), (unsigned long)(seconds % 60));
+
+  oled.fillRect(0, 0, W, 10, SSD1306_WHITE);
+  oled.setTextColor(SSD1306_BLACK);
+  oled.setCursor(2, 1);
+  oled.print(title);
+  oled.setCursor(84, 1);
+  oled.print(timeText);
+  oled.drawRect(118, 2, 8, 5, SSD1306_BLACK);
+  oled.drawPixel(126, 4, SSD1306_BLACK);
+  oled.fillRect(120, 4, 4, 2, SSD1306_BLACK);
+  oled.setTextColor(SSD1306_WHITE);
+}
+
+const char *iconText(Icon icon) {
+  static const char *icons[] = { "H", "W", "A", "S", "<", "i", "?", "D" };
+  return icons[icon];
+}
+
+void drawIcon(Icon icon, int16_t x, int16_t y, int16_t size) {
+  int16_t x1, y1;
+  uint16_t tw, th;
+  const char *label = iconText(icon);
+
+  oled.setTextSize(1);
+  oled.fillRoundRect(x, y, size, size, 5, SSD1306_WHITE);
+  oled.getTextBounds(label, 0, 0, &x1, &y1, &tw, &th);
+  oled.setTextColor(SSD1306_BLACK);
+  oled.setCursor(x + ((size - tw) / 2), y + ((size - th) / 2));
+  oled.print(label);
+  oled.setTextColor(SSD1306_WHITE);
+}
+
+void drawDots() {
+  const int16_t start = (W - ((activeMenu->count - 1) * 8)) / 2;
+  const int16_t y = H - 5;
+
+  for (uint8_t i = 0; i < activeMenu->count; i++) {
+    const int16_t x = start + (i * 8);
+    if (i == selected) oled.fillCircle(x, y, 2, SSD1306_WHITE);
+    else oled.drawCircle(x, y, 1, SSD1306_WHITE);
+  }
+}
+
+void drawMenu() {
+  const Item &item = activeMenu->items[selected];
+  oled.clearDisplay();
+  drawHeader(activeMenu->title);
+
+  if (compact()) {
+    oled.fillRoundRect(9, 12, 110, 14, 3, SSD1306_WHITE);
+    oled.setTextColor(SSD1306_BLACK);
+    oled.setCursor(16, 16);
+    oled.print(item.name);
+    oled.setTextColor(SSD1306_WHITE);
+    oled.setCursor(1, 16);
+    oled.print("<");
+    oled.setCursor(122, 16);
+    oled.print(">");
+  } else {
+    oled.drawRoundRect(4, 14, 120, 38, 6, SSD1306_WHITE);
+    drawIcon(item.icon, 8, 18, 30);
+    oled.setCursor(46, 21);
+    oled.print(selected + 1);
+    oled.print("/");
+    oled.print(activeMenu->count);
+    oled.setCursor(46, 33);
+    oled.print(item.name);
+    oled.setCursor(2, 29);
+    oled.print("<");
+    oled.setCursor(122, 29);
+    oled.print(">");
+  }
+
+  drawDots();
+  oled.display();
+}
+
+void drawPage() {
+  oled.clearDisplay();
+  drawHeader(pageTitle);
+
+  if (compact()) {
+    centerText(pageLine1, 15, 1, SSD1306_WHITE);
+    centerText(pageLine2, 24, 1, SSD1306_WHITE);
+  } else {
+    oled.drawRoundRect(8, 17, 112, 34, 6, SSD1306_WHITE);
+    centerText(pageLine1, 24, 1, SSD1306_WHITE);
+    centerText(pageLine2, 36, 1, SSD1306_WHITE);
+    centerText("OK = BACK", 55, 1, SSD1306_WHITE);
+  }
+
+  oled.display();
+}
+
+void drawDisplayTest() {
+  const uint8_t frame = (millis() / ANIM_MS) % 9;
+  const int16_t top = compact() ? 13 : 18;
+  const int16_t height = compact() ? 16 : 34;
+
+  oled.clearDisplay();
+  drawHeader("DISPLAY");
+  oled.drawRoundRect(8, top, 112, height, 4, SSD1306_WHITE);
+  oled.fillRoundRect(12 + (frame * 11), top + 7, 14, compact() ? 8 : 20, 3, SSD1306_WHITE);
+  oled.display();
+}
+
+void drawLoading(const char *title, const char *message, uint8_t frame, uint8_t percent) {
+  const int16_t barY = compact() ? 24 : 39;
+  const uint8_t barWidth = map(percent, 0, 100, 0, 104);
+
+  oled.clearDisplay();
+  drawHeader(title);
+  centerText(message, compact() ? 13 : 22, 1, SSD1306_WHITE);
+  oled.drawRoundRect(11, barY, 106, 8, 4, SSD1306_WHITE);
+  oled.fillRoundRect(12, barY + 1, barWidth, 6, 3, SSD1306_WHITE);
+  if (!compact()) {
+    oled.setCursor(57, 53);
+    for (uint8_t i = 0; i < frame % 4; i++) oled.print(".");
+  }
+  oled.display();
+}
+
+void loading(const char *title, const char *message, uint16_t durationMs) {
+  if (durationMs == 0) durationMs = 1;
+
+  const uint32_t start = millis();
+  uint8_t frame = 0;
+
+  while (millis() - start < durationMs) {
+    uint32_t percent = ((millis() - start) * 100UL) / durationMs;
+    if (percent > 100) percent = 100;
+    drawLoading(title, message, frame++, (uint8_t)percent);
+    delay(ANIM_MS);
+  }
+}
+
+void drawScreen() {
+  if (screen == SCREEN_MENU) drawMenu();
+  else if (screen == SCREEN_PAGE) drawPage();
+  else drawDisplayTest();
+}
+
+// ===== ESP32 =====
+
+void setup() {
+  Serial.begin(115200);
+  Wire.begin(SDA_PIN, SCL_PIN);
+  Wire.setClock(400000);
+
+  beginButton(leftBtn, BTN_LEFT);
+  beginButton(okBtn, BTN_OK);
+  beginButton(rightBtn, BTN_RIGHT);
+
+  if (!oled.begin(SSD1306_SWITCHCAPVCC, OLED)) {
+    Serial.println("OLED not found. Check I2C wiring, address 0x3C/0x3D, and power.");
+    while (true) delay(1000);
+  }
+
+  oled.setTextWrap(false);
+  activeMenu = &mainMenu;
+  loading("EXODO", "Boot", 700);
+}
+
+void loop() {
+  updateInput();
+
+  if (millis() - clockTick > CLOCK_MS) {
+    clockTick = millis();
+    dirty = true;
+  }
+
+  if (screen == SCREEN_TEST && millis() - animTick > ANIM_MS) {
+    animTick = millis();
+    dirty = true;
+  }
+
+  if (dirty) {
+    dirty = false;
+    drawScreen();
+  }
+}
