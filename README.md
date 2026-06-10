@@ -8,6 +8,22 @@
 : :: ::: :::  :::  : :. :  :: :  :   : :. : 
 ```
 
+<p align="center">
+  <a href="#-english">
+    <img src="https://img.shields.io/badge/Language-English-blue?style=for-the-badge" alt="English">
+  </a>
+  <a href="#-português--brasil--portugal">
+    <img src="https://img.shields.io/badge/Idioma-Português%20🇧🇷%20🇵🇹-green?style=for-the-badge" alt="Português">
+  </a>
+  <a href="#-español">
+    <img src="https://img.shields.io/badge/Idioma-Español-red?style=for-the-badge" alt="Español">
+  </a>
+</p>
+
+---
+
+# 🇺🇸 English
+
 **Exodo Tools** is an open-source educational project focused on building a low-cost, portable, ESP32-based toolkit inspired by devices like the **M5Stick** and the **Flipper Zero**.
 
 The goal of this project is to create an accessible learning platform for students, makers, and hardware enthusiasts who want to study embedded systems, menus, displays, buttons, communication modules, and basic hardware interaction in a practical and affordable way.
@@ -98,7 +114,9 @@ Each button should be connected between the selected GPIO pin and GND.
 
 The project can be tested without the NRF24L01 module. This is useful for developing the menu system, testing the OLED display, and validating the button navigation before adding extra modules.
 
-<img width="639" height="650" alt="Exodo Tools simulation without NRF24L01" src="https://github.com/user-attachments/assets/a3f95183-5d00-44e5-83c2-91ec566e9b41" />
+<p align="center">
+  <img width="639" height="650" alt="Exodo Tools simulation without NRF24L01" src="https://github.com/user-attachments/assets/a3f95183-5d00-44e5-83c2-91ec566e9b41" />
+</p>
 
 ---
 
@@ -157,7 +175,8 @@ Depending on the display and implementation, you may need libraries such as:
 * `Adafruit_SSD1306`
 * `Adafruit_SH110X`
 * `RF24`
-  Only required if using the NRF24L01 module.
+
+`RF24` is only required if you are using the NRF24L01 module.
 
 ---
 
@@ -196,70 +215,68 @@ Please keep all contributions aligned with the educational and ethical purpose o
 
 ---
 
-## License
-
-This project is open source.
-Add your preferred license here, such as:
-
-* MIT License
-* GPLv3
-* Apache 2.0
-
-Example:
-
-```text
-MIT License
-Copyright (c) 2026 Exodo Team
-```
-
----
-
-# Exodo Tools — Português
+# 🇧🇷 🇵🇹 Português — Brasil / Portugal
 
 **Exodo Tools** é um projeto open-source educacional focado na criação de uma ferramenta portátil de baixo custo baseada em ESP32, inspirada em dispositivos como o **M5Stick** e o **Flipper Zero**.
 
-O objetivo do projeto é ajudar estudantes, makers e entusiastas de hardware a aprenderem, na prática, conceitos de sistemas embarcados, displays OLED, botões, menus, comunicação I2C e expansão modular.
+O objetivo deste projeto é criar uma plataforma de aprendizado acessível para estudantes, makers e entusiastas de hardware que desejam estudar sistemas embarcados, menus, displays, botões, módulos de comunicação e interação básica com hardware de forma prática e acessível.
 
-> Este projeto foi criado apenas para fins **educacionais, éticos e legais**.
+> Este projeto foi desenvolvido apenas para fins **educacionais e éticos**.
 
 ---
 
 ## Sobre o Projeto
 
-A ideia do Exodo Tools é ser uma plataforma simples, barata e fácil de montar. Ele não busca ser uma cópia comercial de outros dispositivos, mas sim uma base de estudos para quem quer entender como ferramentas embarcadas funcionam.
+O Exodo Tools foi criado como uma alternativa simples e acessível para aprender como pequenas ferramentas portáteis de hardware funcionam. Em vez de focar em componentes caros ou montagens complexas, o projeto utiliza módulos fáceis de encontrar, como um ESP32, um pequeno display OLED e três botões de navegação.
 
-Com ele, é possível estudar:
+O projeto pode ser usado para estudar:
 
-* Programação com ESP32
-* Interfaces em display OLED
-* Menus controlados por botões
+* Desenvolvimento com ESP32
+* Interfaces com display OLED
+* Sistemas de menu baseados em botões
 * Comunicação I2C
-* Organização de código embarcado
-* Prototipagem de hardware
-* Uso responsável de módulos externos
-* Desenvolvimento open-source
+* Design básico de interface embarcada
+* Expansão modular de hardware
+* Experimentação segura e ética com radiofrequência
+* Desenvolvimento open-source de hardware/software
 
-O módulo NRF24L01 é opcional e deve ser usado somente em ambientes controlados, autorizados e com finalidade educacional.
+O módulo NRF24L01 é opcional e deve ser usado apenas em ambientes controlados, legais e educacionais.
 
 ---
 
-## Componentes Necessários
+## Funcionalidades
 
-| Componente   | Descrição                                   |
-| ------------ | ------------------------------------------- |
-| ESP32        | DevKit ou placa ESP32 semelhante            |
-| Display OLED | Display OLED I2C de 0.92 polegadas          |
-| 3 Botões     | Botões de navegação: esquerda, OK e direita |
-| Jumpers      | Para as conexões                            |
-| Cabo USB     | Para programação e alimentação              |
+* Interface simples baseada em menu
+* Suporte a display OLED
+* Navegação com três botões
+* Sistema baseado em ESP32
+* Design de hardware de baixo custo
+* Suporte opcional ao módulo NRF24L01
+* Estrutura amigável para iniciantes
+* Open-source e fácil de modificar
+* Projetado para experimentos educacionais
+
+---
+
+## Requisitos de Hardware
+
+### Componentes Necessários
+
+| Componente   | Descrição                             |
+| ------------ | ------------------------------------- |
+| ESP32        | DevKit ou placa ESP32 semelhante      |
+| Display OLED | Display OLED I2C de 0.92 polegadas    |
+| 3 Botões     | Navegação para esquerda, OK e direita |
+| Jumpers      | Para as conexões                      |
+| Cabo USB     | Para programação e alimentação        |
 
 ### Componentes Opcionais
 
-| Componente          | Descrição                                            |
-| ------------------- | ---------------------------------------------------- |
-| NRF24L01 com antena | Módulo opcional para testes educacionais controlados |
-| Protoboard          | Útil para prototipagem                               |
-| Case                | Opcional, para deixar o projeto mais organizado      |
+| Componente          | Descrição                                                     |
+| ------------------- | ------------------------------------------------------------- |
+| NRF24L01 com antena | Módulo de rádio opcional para testes educacionais controlados |
+| Protoboard          | Útil para prototipagem                                        |
+| Case/Gabinete       | Opcional, para deixar o dispositivo portátil mais organizado  |
 
 ---
 
@@ -276,7 +293,7 @@ O módulo NRF24L01 é opcional e deve ser usado somente em ambientes controlados
 
 ### Botões
 
-Cada botão deve ser ligado entre o GPIO correspondente e o GND.
+Cada botão deve ser conectado entre o GPIO selecionado e o GND.
 
 | Botão          | Pino do ESP32 |
 | -------------- | ------------- |
@@ -286,19 +303,298 @@ Cada botão deve ser ligado entre o GPIO correspondente e o GND.
 
 ---
 
-## Uso Educacional e Ético
+## Simulação Sem NRF24L01
 
-O Exodo Tools não deve ser usado para atividades maliciosas, invasões, interferência de sinais ou qualquer ação sem autorização.
+O projeto pode ser testado sem o módulo NRF24L01. Isso é útil para desenvolver o sistema de menu, testar o display OLED e validar a navegação por botões antes de adicionar módulos extras.
 
-O projeto é indicado para:
+<p align="center">
+  <img width="639" height="650" alt="Simulação do Exodo Tools sem NRF24L01" src="https://github.com/user-attachments/assets/a3f95183-5d00-44e5-83c2-91ec566e9b41" />
+</p>
 
-* Trabalhos escolares
-* Projetos de faculdade
-* Estudos de sistemas embarcados
+---
+
+## Propósito Educacional
+
+O Exodo Tools foi criado para ajudar iniciantes a entenderem como dispositivos embarcados são construídos. Ele não tem a intenção de ser um dispositivo comercial de segurança, nem uma ferramenta para acesso não autorizado, interferência ou atividades maliciosas.
+
+Este projeto pode ser usado em:
+
+* Projetos escolares
+* Trabalhos de faculdade
 * Laboratórios maker
-* Prototipagem
-* Aprendizado de eletrônica e programação
+* Aulas de sistemas embarcados
+* Aprendizado pessoal
+* Prototipagem de hardware
+* Pesquisa ética em tecnologia
 
-A Exodo Team não apoia qualquer uso ilegal, antiético ou prejudicial deste projeto.
+---
 
-Use com responsabilidade.
+## Política de Uso Ético
+
+Este projeto deve ser usado apenas em ambientes legais, seguros e autorizados.
+
+Você é responsável por seguir as leis e regulamentações do seu país sobre comunicação por rádio, testes sem fio, dispositivos embarcados e experimentação eletrônica.
+
+A Exodo Team **não** apoia:
+
+* Acesso não autorizado a dispositivos ou redes
+* Interferência ou bloqueio de sinais
+* Ataques contra sistemas sem fio
+* Uso malicioso de módulos de rádio
+* Qualquer atividade que viole leis locais ou padrões éticos
+
+Ao usar este projeto, você concorda em utilizá-lo apenas para fins educacionais, éticos e legais.
+
+---
+
+## Primeiros Passos
+
+1. Conecte o display OLED ao ESP32 usando os pinos I2C.
+2. Conecte os três botões aos GPIOs configurados e ao GND.
+3. Abra o projeto na Arduino IDE ou no PlatformIO.
+4. Instale as bibliotecas necessárias.
+5. Envie o código para o ESP32.
+6. Teste a navegação do menu usando os botões.
+7. Adicione módulos opcionais apenas depois que o sistema base estiver funcionando corretamente.
+
+---
+
+## Bibliotecas Recomendadas
+
+Dependendo do display e da implementação, você pode precisar de bibliotecas como:
+
+* `Wire.h`
+* `Adafruit_GFX`
+* `Adafruit_SSD1306`
+* `Adafruit_SH110X`
+* `RF24`
+
+A biblioteca `RF24` só é necessária se você for usar o módulo NRF24L01.
+
+---
+
+## Roadmap
+
+Possíveis melhorias futuras:
+
+* Sistema de menu melhorado
+* Suporte a bateria
+* Case imprimível em 3D
+* Tela de seleção de módulos
+* Menu de configurações
+* Ícones e animações
+* Modos de teste mais seguros
+* Documentação com diagramas
+* Suporte ao PlatformIO
+* Exemplos de aulas para iniciantes
+
+---
+
+## Contribuindo
+
+Contribuições são bem-vindas.
+
+Você pode ajudar:
+
+* Melhorando a documentação
+* Reportando bugs
+* Sugerindo novos recursos educacionais
+* Criando exemplos mais seguros
+* Projetando uma case
+* Melhorando a interface
+* Limpando e otimizando o código
+
+Por favor, mantenha todas as contribuições alinhadas ao propósito educacional e ético do projeto.
+
+---
+
+# 🇪🇸 Español
+
+**Exodo Tools** es un proyecto educativo open-source enfocado en la creación de una herramienta portátil de bajo costo basada en ESP32, inspirada en dispositivos como el **M5Stick** y el **Flipper Zero**.
+
+El objetivo de este proyecto es crear una plataforma de aprendizaje accesible para estudiantes, makers y entusiastas del hardware que quieran estudiar sistemas embebidos, menús, pantallas, botones, módulos de comunicación e interacción básica con hardware de una forma práctica y económica.
+
+> Este proyecto está diseñado únicamente para fines **educativos y éticos**.
+
+---
+
+## Sobre el Proyecto
+
+Exodo Tools fue creado como una alternativa simple y accesible para aprender cómo funcionan pequeñas herramientas portátiles de hardware. En lugar de centrarse en componentes costosos o montajes complejos, el proyecto utiliza módulos fáciles de encontrar, como un ESP32, una pequeña pantalla OLED y tres botones de navegación.
+
+El proyecto se puede usar para estudiar:
+
+* Desarrollo con ESP32
+* Interfaces con pantalla OLED
+* Sistemas de menú basados en botones
+* Comunicación I2C
+* Diseño básico de interfaces embebidas
+* Expansión modular de hardware
+* Experimentación segura y ética con radiofrecuencia
+* Desarrollo open-source de hardware/software
+
+El módulo NRF24L01 es opcional y solo debe utilizarse en entornos controlados, legales y educativos.
+
+---
+
+## Características
+
+* Interfaz simple basada en menú
+* Soporte para pantalla OLED
+* Navegación con tres botones
+* Sistema basado en ESP32
+* Diseño de hardware de bajo costo
+* Soporte opcional para el módulo NRF24L01
+* Estructura amigable para principiantes
+* Open-source y fácil de modificar
+* Diseñado para experimentos educativos
+
+---
+
+## Requisitos de Hardware
+
+### Componentes Necesarios
+
+| Componente    | Descripción                        |
+| ------------- | ---------------------------------- |
+| ESP32         | DevKit o placa ESP32 similar       |
+| Pantalla OLED | Pantalla OLED I2C de 0.92 pulgadas |
+| 3 Botones     | Navegación izquierda, OK y derecha |
+| Cables Jumper | Para las conexiones                |
+| Cable USB     | Para programación y alimentación   |
+
+### Componentes Opcionales
+
+| Componente          | Descripción                                                  |
+| ------------------- | ------------------------------------------------------------ |
+| NRF24L01 con antena | Módulo de radio opcional para pruebas educativas controladas |
+| Protoboard          | Útil para prototipado                                        |
+| Carcasa/Gabinete    | Opcional, para un dispositivo portátil más organizado        |
+
+---
+
+## Conexiones
+
+### Pantalla OLED
+
+| Pin OLED | Pin ESP32 |
+| -------- | --------- |
+| VCC      | 3V3       |
+| GND      | GND       |
+| SDA      | GPIO 21   |
+| SCL      | GPIO 22   |
+
+### Botones
+
+Cada botón debe conectarse entre el pin GPIO seleccionado y GND.
+
+| Botón           | Pin ESP32     |
+| --------------- | ------------- |
+| Botón Izquierdo | GPIO 32 + GND |
+| Botón OK        | GPIO 33 + GND |
+| Botón Derecho   | GPIO 25 + GND |
+
+---
+
+## Simulación Sin NRF24L01
+
+El proyecto se puede probar sin el módulo NRF24L01. Esto es útil para desarrollar el sistema de menú, probar la pantalla OLED y validar la navegación con botones antes de añadir módulos adicionales.
+
+<p align="center">
+  <img width="639" height="650" alt="Simulación de Exodo Tools sin NRF24L01" src="https://github.com/user-attachments/assets/a3f95183-5d00-44e5-83c2-91ec566e9b41" />
+</p>
+
+---
+
+## Propósito Educativo
+
+Exodo Tools está pensado para ayudar a principiantes a entender cómo se construyen los dispositivos embebidos. No está destinado a ser un dispositivo comercial de seguridad ni una herramienta para acceso no autorizado, interferencia o actividades maliciosas.
+
+Este proyecto se puede usar en:
+
+* Proyectos escolares
+* Trabajos universitarios
+* Laboratorios maker
+* Clases de sistemas embebidos
+* Aprendizaje personal
+* Prototipado de hardware
+* Investigación ética en tecnología
+
+---
+
+## Política de Uso Ético
+
+Este proyecto debe utilizarse únicamente en entornos legales, seguros y autorizados.
+
+Tú eres responsable de seguir las leyes y regulaciones de tu país sobre comunicación por radio, pruebas inalámbricas, dispositivos embebidos y experimentación electrónica.
+
+El equipo Exodo **no** apoya:
+
+* Acceso no autorizado a dispositivos o redes
+* Interferencia o bloqueo de señales
+* Ataques contra sistemas inalámbricos
+* Uso malicioso de módulos de radio
+* Cualquier actividad que viole leyes locales o estándares éticos
+
+Al usar este proyecto, aceptas utilizarlo únicamente con fines educativos, éticos y legales.
+
+---
+
+## Primeros Pasos
+
+1. Conecta la pantalla OLED al ESP32 usando los pines I2C.
+2. Conecta los tres botones a los pines GPIO configurados y a GND.
+3. Abre el proyecto en Arduino IDE o PlatformIO.
+4. Instala las bibliotecas necesarias.
+5. Sube el código al ESP32.
+6. Prueba la navegación del menú usando los botones.
+7. Añade módulos opcionales solo después de que el sistema base funcione correctamente.
+
+---
+
+## Bibliotecas Recomendadas
+
+Dependiendo de la pantalla y de la implementación, puedes necesitar bibliotecas como:
+
+* `Wire.h`
+* `Adafruit_GFX`
+* `Adafruit_SSD1306`
+* `Adafruit_SH110X`
+* `RF24`
+
+La biblioteca `RF24` solo es necesaria si vas a usar el módulo NRF24L01.
+
+---
+
+## Roadmap
+
+Posibles mejoras futuras:
+
+* Mejor sistema de menú
+* Soporte para batería
+* Carcasa imprimible en 3D
+* Pantalla de selección de módulos
+* Menú de configuración
+* Iconos y animaciones
+* Modos de prueba más seguros
+* Documentación con diagramas
+* Soporte para PlatformIO
+* Ejemplos de lecciones para principiantes
+
+---
+
+## Contribuir
+
+Las contribuciones son bienvenidas.
+
+Puedes ayudar:
+
+* Mejorando la documentación
+* Reportando errores
+* Sugiriendo nuevas funciones educativas
+* Creando ejemplos más seguros
+* Diseñando una carcasa
+* Mejorando la interfaz
+* Limpiando y optimizando el código
+
+Por favor, mantén todas las contribuciones alineadas con el propósito educativo y ético del proyecto.
