@@ -658,23 +658,10 @@ Puedes ayudar:
 * Mejorando la interfaz
 * Limpiando y optimizando el código
 
-Por favor, mantén todas las contribuciones alineadas con el propósito educativo y ético del proyecto.
+Por favor, mantén todas las contribuciones alineadas con el propósito educativo y ético del proyecto
 
 ---
 
-## Licencia
-
-Este proyecto es open-source.
-
-Añade aquí la licencia que prefieras, como:
-
-* MIT License
-* GPLv3
-* Apache 2.0
-
-Ejemplo:
-
-```text
-MIT License
-Copyright (c) 2026 Exodo Team
-```
+<p align="center">
+  <img width="480" height="480" alt="BvS0UKwFvN1TwzsXDF;gif" src="https://github.com/user-attachments/assets/049abe53-a0f4-4b83-b695-7b27a4634b46" />
+</p>
