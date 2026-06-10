@@ -1,12 +1,6 @@
 # Exodo Tools
 
-```text
-@@@@@@@@ @@@  @@@  @@@@@@  @@@@@@@   @@@@@@ 
-@@!      @@!  !@@ @@!  @@@ @@!  @@@ @@!  @@@
-@!!!:!    !@@!@!  @!@  !@! @!@  !@! @!@  !@!
-!!:       !: :!!  !!:  !!! !!:  !!! !!:  !!!
-: :: ::: :::  :::  : :. :  :: :  :   : :. : 
-```
+<img width="680" height="240" alt="standard" src="https://github.com/user-attachments/assets/12cc1216-af11-4c02-826c-d80c36a8d175" />
 
 <p align="center">
   <strong>An open-source ethical and educational hacking tool made by Brazilian students 🇧🇷</strong>
@@ -23,10 +17,6 @@
     <img src="https://img.shields.io/badge/Idioma-Español-red?style=for-the-badge" alt="Español">
   </a>
 </p>
-
----
-
-<img width="680" height="240" alt="standard" src="https://github.com/user-attachments/assets/12cc1216-af11-4c02-826c-d80c36a8d175" />
 
 ---
 
