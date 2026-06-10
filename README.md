@@ -663,5 +663,5 @@ Por favor, mantén todas las contribuciones alineadas con el propósito educativ
 ---
 
 <p align="center">
-  <img width="480" height="480" alt="BvS0UKwFvN1TwzsXDF;gif" src="https://github.com/user-attachments/assets/049abe53-a0f4-4b83-b695-7b27a4634b46" />
+  <img width="480" height="270" alt="giphy" src="https://github.com/user-attachments/assets/c5bff6db-d0a6-4be9-ae5b-62219c9ce360" />
 </p>
