@@ -114,13 +114,17 @@ Each button should be connected between the selected GPIO pin and GND.
 
 ---
 
-## Simulation Without NRF24L01
 
-The project can be tested without the NRF24L01 module. This is useful for developing the menu system, testing the OLED display, and validating the button navigation before adding extra modules.
+## Simulation With Firmware Without Functions
+
+The project can be tested with a basic firmware simulation before adding functional modules. This version is useful for checking the OLED display, validating the button navigation, testing the interface layout, and confirming that the base firmware is running correctly.
+
+At this stage, the simulation does not include active tools or advanced functions. It is focused only on the visual interface and basic navigation structure.
 
 <p align="center">
-  <img width="639" height="650" alt="Exodo Tools simulation without NRF24L01" src="https://github.com/user-attachments/assets/a3f95183-5d00-44e5-83c2-91ec566e9b41" />
+  <img width="780" height="752" alt="Exodo Tools firmware simulation without functions" src="https://github.com/user-attachments/assets/34934635-f67a-4f3b-a811-372d1d7d5213" />
 </p>
+
 
 ---
 
@@ -331,12 +335,14 @@ Cada botão deve ser conectado entre o GPIO selecionado e o GND.
 
 ---
 
-## Simulação Sem NRF24L01
+## Simulação com Firmware Sem Funções
 
-O projeto pode ser testado sem o módulo NRF24L01. Isso é útil para desenvolver o sistema de menu, testar o display OLED e validar a navegação por botões antes de adicionar módulos extras.
+O projeto pode ser testado com uma simulação básica do firmware antes da adição dos módulos funcionais. Esta versão é útil para verificar o display OLED, validar a navegação pelos botões, testar o layout da interface e confirmar que o firmware base está funcionando corretamente.
+
+Nesta etapa, a simulação ainda não inclui ferramentas ativas ou funções avançadas. O foco é apenas na interface visual e na estrutura básica de navegação.
 
 <p align="center">
-  <img width="639" height="650" alt="Simulação do Exodo Tools sem NRF24L01" src="https://github.com/user-attachments/assets/a3f95183-5d00-44e5-83c2-91ec566e9b41" />
+  <img width="780" height="752" alt="Simulação do firmware do Exodo Tools sem funções" src="https://github.com/user-attachments/assets/34934635-f67a-4f3b-a811-372d1d7d5213" />
 </p>
 
 ---
@@ -548,12 +554,14 @@ Cada botón debe conectarse entre el pin GPIO seleccionado y GND.
 
 ---
 
-## Simulación Sin NRF24L01
+## Simulación con Firmware Sin Funciones
 
-El proyecto se puede probar sin el módulo NRF24L01. Esto es útil para desarrollar el sistema de menú, probar la pantalla OLED y validar la navegación con botones antes de añadir módulos adicionales.
+El proyecto se puede probar con una simulación básica del firmware antes de añadir módulos funcionales. Esta versión es útil para verificar la pantalla OLED, validar la navegación con botones, probar el diseño de la interfaz y confirmar que el firmware base funciona correctamente.
+
+En esta etapa, la simulación todavía no incluye herramientas activas ni funciones avanzadas. El enfoque está únicamente en la interfaz visual y en la estructura básica de navegación.
 
 <p align="center">
-  <img width="639" height="650" alt="Simulación de Exodo Tools sin NRF24L01" src="https://github.com/user-attachments/assets/a3f95183-5d00-44e5-83c2-91ec566e9b41" />
+  <img width="780" height="752" alt="Simulación del firmware de Exodo Tools sin funciones" src="https://github.com/user-attachments/assets/34934635-f67a-4f3b-a811-372d1d7d5213" />
 </p>
 
 ---
