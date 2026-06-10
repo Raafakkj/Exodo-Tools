@@ -102,30 +102,6 @@ The project can be tested without the NRF24L01 module. This is useful for develo
 
 ---
 
-## Suggested Project Structure
-
-```text
-Exodo-Tools/
-├── src/
-│   ├── main.ino
-│   ├── menu.cpp
-│   ├── menu.h
-│   ├── display.cpp
-│   ├── display.h
-│   └── buttons.cpp
-│
-├── docs/
-│   └── wiring.md
-│
-├── images/
-│   └── simulation.png
-│
-├── README.md
-└── LICENSE
-```
-
----
-
 ## Educational Purpose
 
 Exodo Tools is meant to help beginners understand how embedded devices are built. It is not intended to be a commercial security device or a tool for unauthorized access, interference, or malicious activity.
