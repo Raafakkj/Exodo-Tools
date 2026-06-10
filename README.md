@@ -224,25 +224,6 @@ Please keep all contributions aligned with the educational and ethical purpose o
 
 ---
 
-## License
-
-This project is open source.
-
-Add your preferred license here, such as:
-
-* MIT License
-* GPLv3
-* Apache 2.0
-
-Example:
-
-```text
-MIT License
-Copyright (c) 2026 Exodo Team
-```
-
----
-
 <a id="portugues"></a>
 
 # 🇧🇷 🇵🇹 Português — Brasil / Portugal
@@ -440,25 +421,6 @@ Você pode ajudar:
 * Limpando e otimizando o código
 
 Por favor, mantenha todas as contribuições alinhadas ao propósito educacional e ético do projeto.
-
----
-
-## Licença
-
-Este projeto é open-source.
-
-Adicione aqui a licença de sua preferência, como:
-
-* MIT License
-* GPLv3
-* Apache 2.0
-
-Exemplo:
-
-```text
-MIT License
-Copyright (c) 2026 Exodo Team
-```
 
 ---
 
