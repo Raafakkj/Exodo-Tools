@@ -9,26 +9,32 @@
 ```
 
 <p align="center">
-  <a href="#-english">
+  <strong>An open-source ethical and educational hacking tool made by Brazilian students 🇧🇷</strong>
+</p>
+
+<p align="center">
+  <a href="#english">
     <img src="https://img.shields.io/badge/Language-English-blue?style=for-the-badge" alt="English">
   </a>
-  <a href="#-português--brasil--portugal">
+  <a href="#portugues">
     <img src="https://img.shields.io/badge/Idioma-Português%20🇧🇷%20🇵🇹-green?style=for-the-badge" alt="Português">
   </a>
-  <a href="#-español">
+  <a href="#espanol">
     <img src="https://img.shields.io/badge/Idioma-Español-red?style=for-the-badge" alt="Español">
   </a>
 </p>
 
 ---
 
+<a id="english"></a>
+
 # 🇺🇸 English
 
 **Exodo Tools** is an open-source educational project focused on building a low-cost, portable, ESP32-based toolkit inspired by devices like the **M5Stick** and the **Flipper Zero**.
 
-The goal of this project is to create an accessible learning platform for students, makers, and hardware enthusiasts who want to study embedded systems, menus, displays, buttons, communication modules, and basic hardware interaction in a practical and affordable way.
+The goal of this project is to create an accessible learning platform for students, makers, and hardware enthusiasts who want to study embedded systems, menus, displays, buttons, communication modules, cybersecurity concepts, and basic hardware interaction in a practical and affordable way.
 
-> This project is designed for **educational and ethical purposes only**.
+> This project is designed for **educational, ethical, and legal purposes only**.
 
 ---
 
@@ -44,6 +50,7 @@ The project can be used to study:
 * I2C communication
 * Basic embedded UI design
 * Modular hardware expansion
+* Cybersecurity learning concepts
 * Safe and ethical radio-frequency experimentation
 * Open-source hardware/software development
 
@@ -62,6 +69,7 @@ The NRF24L01 module is optional and should only be used in controlled, legal, an
 * Beginner-friendly structure
 * Open-source and easy to modify
 * Designed for educational experiments
+* Focused on ethical hacking education
 
 ---
 
@@ -130,6 +138,7 @@ This project can be used in:
 * College assignments
 * Maker labs
 * Embedded systems classes
+* Cybersecurity learning labs
 * Personal learning
 * Hardware prototyping
 * Ethical technology research
@@ -140,7 +149,7 @@ This project can be used in:
 
 This project must only be used in legal, safe, and authorized environments.
 
-You are responsible for following the laws and regulations of your country regarding radio communication, wireless testing, embedded devices, and electronic experimentation.
+You are responsible for following the laws and regulations of your country regarding radio communication, wireless testing, embedded devices, cybersecurity testing, and electronic experimentation.
 
 The Exodo Team does **not** support:
 
@@ -215,13 +224,34 @@ Please keep all contributions aligned with the educational and ethical purpose o
 
 ---
 
+## License
+
+This project is open source.
+
+Add your preferred license here, such as:
+
+* MIT License
+* GPLv3
+* Apache 2.0
+
+Example:
+
+```text
+MIT License
+Copyright (c) 2026 Exodo Team
+```
+
+---
+
+<a id="portugues"></a>
+
 # 🇧🇷 🇵🇹 Português — Brasil / Portugal
 
 **Exodo Tools** é um projeto open-source educacional focado na criação de uma ferramenta portátil de baixo custo baseada em ESP32, inspirada em dispositivos como o **M5Stick** e o **Flipper Zero**.
 
-O objetivo deste projeto é criar uma plataforma de aprendizado acessível para estudantes, makers e entusiastas de hardware que desejam estudar sistemas embarcados, menus, displays, botões, módulos de comunicação e interação básica com hardware de forma prática e acessível.
+O objetivo deste projeto é criar uma plataforma de aprendizado acessível para estudantes, makers e entusiastas de hardware que desejam estudar sistemas embarcados, menus, displays, botões, módulos de comunicação, conceitos de cibersegurança e interação básica com hardware de forma prática e acessível.
 
-> Este projeto foi desenvolvido apenas para fins **educacionais e éticos**.
+> Este projeto foi desenvolvido apenas para fins **educacionais, éticos e legais**.
 
 ---
 
@@ -237,6 +267,7 @@ O projeto pode ser usado para estudar:
 * Comunicação I2C
 * Design básico de interface embarcada
 * Expansão modular de hardware
+* Conceitos de aprendizado em cibersegurança
 * Experimentação segura e ética com radiofrequência
 * Desenvolvimento open-source de hardware/software
 
@@ -255,6 +286,7 @@ O módulo NRF24L01 é opcional e deve ser usado apenas em ambientes controlados,
 * Estrutura amigável para iniciantes
 * Open-source e fácil de modificar
 * Projetado para experimentos educacionais
+* Focado em educação sobre hacking ético
 
 ---
 
@@ -323,6 +355,7 @@ Este projeto pode ser usado em:
 * Trabalhos de faculdade
 * Laboratórios maker
 * Aulas de sistemas embarcados
+* Laboratórios de aprendizado em cibersegurança
 * Aprendizado pessoal
 * Prototipagem de hardware
 * Pesquisa ética em tecnologia
@@ -333,7 +366,7 @@ Este projeto pode ser usado em:
 
 Este projeto deve ser usado apenas em ambientes legais, seguros e autorizados.
 
-Você é responsável por seguir as leis e regulamentações do seu país sobre comunicação por rádio, testes sem fio, dispositivos embarcados e experimentação eletrônica.
+Você é responsável por seguir as leis e regulamentações do seu país sobre comunicação por rádio, testes sem fio, dispositivos embarcados, testes de cibersegurança e experimentação eletrônica.
 
 A Exodo Team **não** apoia:
 
@@ -408,13 +441,34 @@ Por favor, mantenha todas as contribuições alinhadas ao propósito educacional
 
 ---
 
+## Licença
+
+Este projeto é open-source.
+
+Adicione aqui a licença de sua preferência, como:
+
+* MIT License
+* GPLv3
+* Apache 2.0
+
+Exemplo:
+
+```text
+MIT License
+Copyright (c) 2026 Exodo Team
+```
+
+---
+
+<a id="espanol"></a>
+
 # 🇪🇸 Español
 
 **Exodo Tools** es un proyecto educativo open-source enfocado en la creación de una herramienta portátil de bajo costo basada en ESP32, inspirada en dispositivos como el **M5Stick** y el **Flipper Zero**.
 
-El objetivo de este proyecto es crear una plataforma de aprendizaje accesible para estudiantes, makers y entusiastas del hardware que quieran estudiar sistemas embebidos, menús, pantallas, botones, módulos de comunicación e interacción básica con hardware de una forma práctica y económica.
+El objetivo de este proyecto es crear una plataforma de aprendizaje accesible para estudiantes, makers y entusiastas del hardware que quieran estudiar sistemas embebidos, menús, pantallas, botones, módulos de comunicación, conceptos de ciberseguridad e interacción básica con hardware de una forma práctica y económica.
 
-> Este proyecto está diseñado únicamente para fines **educativos y éticos**.
+> Este proyecto está diseñado únicamente para fines **educativos, éticos y legales**.
 
 ---
 
@@ -430,6 +484,7 @@ El proyecto se puede usar para estudiar:
 * Comunicación I2C
 * Diseño básico de interfaces embebidas
 * Expansión modular de hardware
+* Conceptos de aprendizaje en ciberseguridad
 * Experimentación segura y ética con radiofrecuencia
 * Desarrollo open-source de hardware/software
 
@@ -448,6 +503,7 @@ El módulo NRF24L01 es opcional y solo debe utilizarse en entornos controlados, 
 * Estructura amigable para principiantes
 * Open-source y fácil de modificar
 * Diseñado para experimentos educativos
+* Enfocado en la educación sobre hacking ético
 
 ---
 
@@ -516,6 +572,7 @@ Este proyecto se puede usar en:
 * Trabajos universitarios
 * Laboratorios maker
 * Clases de sistemas embebidos
+* Laboratorios de aprendizaje en ciberseguridad
 * Aprendizaje personal
 * Prototipado de hardware
 * Investigación ética en tecnología
@@ -526,7 +583,7 @@ Este proyecto se puede usar en:
 
 Este proyecto debe utilizarse únicamente en entornos legales, seguros y autorizados.
 
-Tú eres responsable de seguir las leyes y regulaciones de tu país sobre comunicación por radio, pruebas inalámbricas, dispositivos embebidos y experimentación electrónica.
+Tú eres responsable de seguir las leyes y regulaciones de tu país sobre comunicación por radio, pruebas inalámbricas, dispositivos embebidos, pruebas de ciberseguridad y experimentación electrónica.
 
 El equipo Exodo **no** apoya:
 
@@ -598,3 +655,22 @@ Puedes ayudar:
 * Limpiando y optimizando el código
 
 Por favor, mantén todas las contribuciones alineadas con el propósito educativo y ético del proyecto.
+
+---
+
+## Licencia
+
+Este proyecto es open-source.
+
+Añade aquí la licencia que prefieras, como:
+
+* MIT License
+* GPLv3
+* Apache 2.0
+
+Ejemplo:
+
+```text
+MIT License
+Copyright (c) 2026 Exodo Team
+```
